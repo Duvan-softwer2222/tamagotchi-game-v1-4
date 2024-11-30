@@ -167,12 +167,12 @@ function startGame() {
 		scoreBar.innerHTML = score;
 
 		//Death ability
-		if ((playHpCount <= 0) || (sleepHpCount <= 0) || (hungerHpCount <= 0)) {
+		if ((playHpCount <= 0) || (sleepHpCount <= 0) || (hungerHpCount <= 0) || (hungerHpCount >= 110) || (sleepHpCount >= 110) || (playHpCount >= 110)) {
 			playHpCount = 0;
 			sleepHpCount = 0;
 			hungerHpCount = 0;
 			clearInterval(coreUpdate);
-			alert('Your score: ' + score + '\n ╭(×_×)╮');
+			alert('Your score: ' + score + '\n C murio 💀');
 		}
 
 		//Max health percentage (real)
