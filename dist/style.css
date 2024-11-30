@@ -76,6 +76,7 @@ h3 {
 /*GAME SCREEN*/
 
 .tamagotchi {
+  color: #f88418;
   position: absolute;
   display: block;
   width: 100%;
