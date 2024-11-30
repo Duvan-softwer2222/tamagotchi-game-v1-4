@@ -281,3 +281,42 @@ function startGame() {
 		}
 	}
 }
+
+// Función para guardar los datos del Tamagotchi en la base de datos
+function saveData() {
+    const nombre = document.querySelector("#name").innerText; // Nombre del Tamagotchi
+    const comida = tmgch.hunger;
+    const felicidad = tmgch.sleep;
+    const energia = tmgch.play;
+
+    fetch('save_data.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `nombre=${nombre}&comida=${comida}&felicidad=${felicidad}&energia=${energia}`
+    })
+    .then(response => response.text())
+    .then(data => console.log(data)) // Mostrar respuesta del servidor
+    .catch(error => console.error('Error:', error));
+}
+
+// Función para cargar los datos desde la base de datos
+function loadData() {
+    fetch('load_data.php')
+    .then(response => response.json())
+    .then(data => {
+        if (!data.error) {
+            // Asignar los datos al Tamagotchi
+            tmgch.hunger = data.comida;
+            tmgch.sleep = data.felicidad;
+            tmgch.play = data.energia;
+            document.querySelector("#name").innerText = data.nombre;
+            console.log(data);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+// Cargar datos al iniciar
+loadData();
