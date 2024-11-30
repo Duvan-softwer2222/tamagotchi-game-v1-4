@@ -117,12 +117,12 @@ nightModeOnBtn.addEventListener("click", function() {
 //NightMode toggle
 function nightModeOn() {
 	document.querySelector('body').classList.add("nightmode-on");
-	document.querySelector('#nightmode').innerHTML = "on";
+	document.querySelector('#nightmode').innerHTML = "Negro";
 }
 
 function nightModeOff() {
 	document.querySelector('body').classList.remove("nightmode-on");
-	document.querySelector('#nightmode').innerHTML = "off";
+	document.querySelector('#nightmode').innerHTML = "Blanco";
 }
 
 //Togglers for buttons
@@ -144,7 +144,7 @@ function startGame() {
 	document.querySelector(".main-menu-screen").classList.toggle("hide");
 
 	//Tamagotchi's name
-	var tamagotchiName = prompt("Please, enter a name of your tamagotchi:", "");
+	var tamagotchiName = prompt("Ponle el nombre a tu tamagotchi Perron 🔥 :", "");
 	document.querySelector("#name").innerHTML = tamagotchiName;
 	if (tamagotchiName == null || tamagotchiName.replace(/\s/g, '') == "") {
 		tamagotchiName = "Tamagotchi";
