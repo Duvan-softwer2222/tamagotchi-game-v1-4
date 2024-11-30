@@ -167,7 +167,7 @@ function startGame() {
 		scoreBar.innerHTML = score;
 
 		//Death ability
-		if ((playHpCount <= 0) || (sleepHpCount <= 0) || (hungerHpCount <= 0) || (hungerHpCount >= 110) || (sleepHpCount >= 110) || (playHpCount >= 110)) {
+		if ((playHpCount <= 0) || (sleepHpCount <= 0) || (hungerHpCount <= 0) || (hungerHpCount >= 110) || (sleepHpCount >= 110)) {
 			playHpCount = 0;
 			sleepHpCount = 0;
 			hungerHpCount = 0;
