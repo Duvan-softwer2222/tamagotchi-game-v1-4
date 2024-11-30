@@ -172,7 +172,7 @@ function startGame() {
 			sleepHpCount = 0;
 			hungerHpCount = 0;
 			clearInterval(coreUpdate);
-			alert('Your score: ' + score + '\n C murio 💀');
+			alert('Your score: ' + score + '\n C mamo se revelio 💀');
 		}
 
 		//Max health percentage (real)
