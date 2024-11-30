@@ -10,8 +10,18 @@
 }
 
 body {
-  background-color: #fafafa;
-  transition: background-color .3s;
+  background-image: url(https://img.freepik.com/vector-premium/retro-patrones-fisuras-coloridos-tamagotchi-fondo-elementos-vintage-90s-videojuego_522453-204.jpg) ;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(56, 223, 223, 0.89); /* Ajusta el valor del 0.3 para la opacidad */
+  pointer-events: none; /* Evita que el pseudo-elemento interfiera con la interacción del usuario */
 }
 
 h1, h2 {
