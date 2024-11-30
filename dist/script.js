@@ -117,12 +117,12 @@ nightModeOnBtn.addEventListener("click", function() {
 //NightMode toggle
 function nightModeOn() {
 	document.querySelector('body').classList.add("nightmode-on");
-	document.querySelector('#nightmode').innerHTML = "Negro";
+	document.querySelector('#nightmode').innerHTML = "Blanco";
 }
 
 function nightModeOff() {
 	document.querySelector('body').classList.remove("nightmode-on");
-	document.querySelector('#nightmode').innerHTML = "Blanco";
+	document.querySelector('#nightmode').innerHTML = "Negro";
 }
 
 //Togglers for buttons
