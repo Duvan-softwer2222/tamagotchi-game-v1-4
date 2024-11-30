@@ -166,14 +166,25 @@ function startGame() {
 		score++;
 		scoreBar.innerHTML = score;
 
-		//Death ability
 		if ((playHpCount <= 0) || (sleepHpCount <= 0) || (sleepHpCount > 110) || (hungerHpCount <= 0) || (hungerHpCount > 110)) {
 			playHpCount = 0;
 			sleepHpCount = 0;
 			hungerHpCount = 0;
 			clearInterval(coreUpdate);
-			alert('Your score: ' + score + '\n ╭(×_×)╮');
+		
+			// Calcula la duración del juego
+			const endTime = new Date();
+			const duration = Math.floor((endTime - startTime) / 1000); // Duración en segundos
+			const tamagotchiName = document.querySelector("#name").innerHTML;
+		
+			// Guarda el puntaje en la base de datos
+			saveScoreToDatabase(tamagotchiName, score, duration);
+		
+			// Muestra un mensaje de muerte y reinicia al menú
+			alert(`Game Over!\nName: ${tamagotchiName}\nScore: ${score}\nDuration: ${duration}s\n╭(×_×)╮`);
+			resetToMainMenu(); // Reinicia el juego
 		}
+		
 
 		//Max health percentage (real)
 		//Little help for player
@@ -281,3 +292,59 @@ function startGame() {
 		}
 	}
 }
+
+function saveScoreToDatabase(name, score, duration) {
+    fetch('save_score.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `name=${encodeURIComponent(name)}&score=${score}&duration=${duration}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log('Score saved:', data.message);
+        } else {
+            console.error('Error saving score:', data.message);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+
+
+function displayScoresFromDatabase() {
+    fetch('get_scores.php')
+        .then(response => response.json())
+        .then(scores => {
+            let scoreTable = "High Scores:\n";
+            scores.forEach((entry, index) => {
+                scoreTable += `${index + 1}. ${entry.name} - Score: ${entry.score}, Duration: ${entry.duration}s\n`;
+            });
+            alert(scoreTable);
+        })
+        .catch(error => console.error('Error fetching scores:', error));
+}
+
+
+// Referencia al botón "High Scores"
+const highScoresBtn = document.querySelector("#action-menu-high-scores");
+
+// Función para mostrar los puntajes (puede ser desde localStorage o base de datos)
+function displayScores() {
+    // Ejemplo para recuperar puntajes de una base de datos
+    fetch('get_scores.php') // Si usas un backend PHP
+        .then(response => response.json())
+        .then(scores => {
+            let scoreTable = "High Scores:\n";
+            scores.forEach((entry, index) => {
+                scoreTable += `${index + 1}. ${entry.name} - Score: ${entry.score}, Duration: ${entry.duration}s\n`;
+            });
+            alert(scoreTable); // Muestra los puntajes en una ventana emergente
+        })
+        .catch(error => console.error('Error fetching scores:', error));
+}
+
+// Asocia la función al evento 'click'
+highScoresBtn.addEventListener("click", displayScores);
